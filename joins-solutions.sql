@@ -15,8 +15,10 @@ SELECT warehouse_id FROM warehouse_product
 WHERE product_id = 6;
 
 -- 5.Get the number of orders for each customer. NOTE: It is OK if those without orders are not included in results.
-SELECT * FROM orders
-JOIN addresses ON addresses.customer_id = orders.id;
+SELECT customer_id, count(orders.id) FROM addresses
+JOIN orders ON orders.address_id = addresses.id
+JOIN customers ON addresses.customer_id = customers.id
+GROUP BY customer_id;
 
 -- 6.How many customers do we have?
 SELECT COUNT(customers.id) FROM customers;
